@@ -13,7 +13,7 @@
 
 ## 배포
 
-배포 URL: [추가 예정]
+배포 URL: (https://realteeth-frontend-4m2x-9awgqbc34-hcwoos-projects.vercel.app/)
 
 ## 프로젝트 실행 방법
 
@@ -354,7 +354,7 @@ useEffect(() => {
 ```typescript
 // src/features/search/ui/RecentSearches.tsx
 interface RecentSearchesProps {
-  recentSearches: RecentSearch[];  // 부모로부터 받기
+  recentSearches: RecentSearch[]; // 부모로부터 받기
   onSelect: (coords: Coordinates, address: string) => void;
   onRemove: (id: string) => void;
   onClear: () => void;
@@ -364,7 +364,7 @@ export const RecentSearches = ({
   recentSearches,
   onSelect,
   onRemove,
-  onClear
+  onClear,
 }: RecentSearchesProps) => {
   // 내부에서 훅을 호출하지 않음
   // Props로 전달받은 데이터와 콜백 함수만 사용
@@ -377,7 +377,7 @@ const {
   recentSearches,
   addRecentSearch,
   removeRecentSearch,
-  clearRecentSearches
+  clearRecentSearches,
 } = useRecentSearches();
 
 // 자식 컴포넌트에 Props로 전달
@@ -386,7 +386,7 @@ const {
   onSelect={handleLocationSelect}
   onRemove={removeRecentSearch}
   onClear={clearRecentSearches}
-/>
+/>;
 ```
 
 **선택 이유:**
@@ -413,14 +413,16 @@ const useDarkMode = () => {
 
   useEffect(() => {
     // 1. localStorage에 저장된 사용자 선택 확인
-    const stored = localStorage.getItem('weather_dark_mode');
+    const stored = localStorage.getItem("weather_dark_mode");
     if (stored !== null) {
-      const darkMode = stored === 'true';
+      const darkMode = stored === "true";
       setIsDarkMode(darkMode);
       updateDarkModeClass(darkMode);
     } else {
       // 2. 시스템 테마 감지
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
       setIsDarkMode(prefersDark);
       updateDarkModeClass(prefersDark);
     }
@@ -428,16 +430,16 @@ const useDarkMode = () => {
 
   const updateDarkModeClass = (darkMode: boolean) => {
     if (darkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   };
 
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => {
       const newValue = !prev;
-      localStorage.setItem('weather_dark_mode', String(newValue));
+      localStorage.setItem("weather_dark_mode", String(newValue));
       updateDarkModeClass(newValue);
       return newValue;
     });
@@ -450,9 +452,9 @@ const useDarkMode = () => {
 ```typescript
 // tailwind.config.ts
 const config: Config = {
-  darkMode: 'class',  // HTML 클래스 기반 다크 모드
+  darkMode: "class", // HTML 클래스 기반 다크 모드
   // ...
-}
+};
 ```
 
 **적용 예시:**
@@ -460,9 +462,7 @@ const config: Config = {
 ```tsx
 // 모든 컴포넌트에 dark: 변형 적용
 <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-  <button className="hover:bg-gray-100 dark:hover:bg-gray-700">
-    ...
-  </button>
+  <button className="hover:bg-gray-100 dark:hover:bg-gray-700">...</button>
 </div>
 ```
 
