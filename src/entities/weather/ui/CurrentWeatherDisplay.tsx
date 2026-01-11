@@ -6,13 +6,15 @@ interface CurrentWeatherDisplayProps {
   locationName?: string;
   onToggleFavorite?: () => void;
   isFavorited?: boolean;
+  canAddMore?: boolean;
 }
 
 export const CurrentWeatherDisplay = ({
   weather,
   locationName,
   onToggleFavorite,
-  isFavorited = false
+  isFavorited = false,
+  canAddMore = true
 }: CurrentWeatherDisplayProps) => {
   return (
     <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-6">
@@ -23,8 +25,9 @@ export const CurrentWeatherDisplay = ({
           {onToggleFavorite && (
             <button
               onClick={onToggleFavorite}
-              className="text-2xl transition-all hover:scale-110"
-              title={isFavorited ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+              className="text-2xl transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+              title={isFavorited ? "즐겨찾기 해제" : canAddMore ? "즐겨찾기 추가" : "즐겨찾기는 최대 6개까지 가능합니다"}
+              disabled={!isFavorited && !canAddMore}
             >
               {isFavorited ? '⭐' : '☆'}
             </button>
