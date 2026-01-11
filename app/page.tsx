@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { CurrentWeatherDisplay } from "@/entities/weather/ui/CurrentWeatherDisplay";
 import { HourlyForecast } from "@/entities/weather/ui/HourlyForecast";
@@ -21,7 +21,7 @@ import { useFavorites } from "@/shared/hooks/useFavorites";
 import { useRecentSearches } from "@/shared/hooks/useRecentSearches";
 import type { Coordinates } from "@/shared/types";
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const urlLat = searchParams.get("lat");
   const urlLon = searchParams.get("lon");
@@ -195,5 +195,13 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 dark:bg-gray-900"><WeatherSkeleton /></div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
