@@ -13,7 +13,7 @@
 
 ## 배포
 
-배포 URL: (https://realteeth-frontend-4m2x-9awgqbc34-hcwoos-projects.vercel.app/)
+배포 URL: (https://realteeth-frontend-4m2x.vercel.app/)
 
 ## 프로젝트 실행 방법
 
